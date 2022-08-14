@@ -131,14 +131,13 @@ class GoGame:
                 end_pos=(BOARD_LEN+OFFSET[0], grid_x_idx * GRID_LEN+OFFSET[1])
             )
 
-        # draw 星位
+        '''draw 星位'''
         y = OFFSET[1] + GRID_LEN * 3
         x = OFFSET[0] + GRID_LEN * 3
         for i in range(3):
             for j in range(3):
-                pg.draw.circle(board, (0, 0, 0), (x, y), 4)
-                y += GRID_LEN * 6
-            x += GRID_LEN * 6
+                pg.draw.circle(board, (0, 0, 0), (x+i*6*GRID_LEN, y+j*6*GRID_LEN), 4)
+                print(x,y)
 
         # draw blackgroups whitegroups
         for group in self.blackgroups:
@@ -278,6 +277,11 @@ class GoGame:
                     (pos[0]-1, pos[1]),
                 ]
 
+                for candidate in candidates[::-1]:
+                    for cord in candidate:
+                        if cord not in range(19):
+                            candidates.remove(candidate)
+
                 # candidates是不是都有棋子
                 for candidate in candidates:
                     if not self.occupied(candidate):  # 如果有一个邻居没有棋子，则group不可能被吃
@@ -306,6 +310,11 @@ class GoGame:
                     (pos[0]+1, pos[1]),
                     (pos[0]-1, pos[1]),
                 ]
+
+                for candidate in candidates[::-1]:
+                    for cord in candidate:
+                        if cord not in range(19):
+                            candidates.remove(candidate)
 
                 # candidates是不是都有棋子
                 for candidate in candidates:
