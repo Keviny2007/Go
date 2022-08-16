@@ -137,7 +137,10 @@ class GoGame:
         for i in range(3):
             for j in range(3):
                 pg.draw.circle(board, (0, 0, 0), (x+i*6*GRID_LEN, y+j*6*GRID_LEN), 4)
-                print(x,y)
+                
+
+        
+
 
         # draw blackgroups whitegroups
         for group in self.blackgroups:
@@ -252,12 +255,7 @@ class GoGame:
                 return
 
         self.cur_chess_color = [255-x for x in self.cur_chess_color]
-        print('white groups')
-        for group in self.whitegroups:
-            print(group)
-        print('black groups')
-        for group in self.blackgroups:
-            print(group)
+        
 
     def eat_whitegroups(self) -> bool:
         self.just_eaten = []
@@ -406,6 +404,10 @@ class GoGame:
                     # lay a chess
                     self.add_chess(pg.mouse.get_pos())
                     self.draw_bg()
+
+            font = pg.font.SysFont(None, 24)
+            img = font.render('hello', True, "BLUE")
+            self.window.blit(img, (500, 500))
 
             self.window.blit(self.borad, (0, 0))
             pg.draw.circle(self.window, self.cur_chess_color,
