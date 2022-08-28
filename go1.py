@@ -115,6 +115,13 @@ class GoGame:
         board = pg.Surface(WINDOW_SIZE)
         board.fill((242, 194, 111))
 
+        font = pg.font.SysFont('chalkduster.ttf', 72)
+        
+        # create a text surface object,
+        # on which text is drawn on it.
+        text = font.render('by Kevin', True, (125,125,125))
+        board.blit(text, (20,600))
+
         '''draw lines to form grids'''
         for grid_x_idx in range(GRID_NUM):
             pg.draw.line(
@@ -405,9 +412,6 @@ class GoGame:
                     self.add_chess(pg.mouse.get_pos())
                     self.draw_bg()
 
-            font = pg.font.SysFont(None, 24)
-            img = font.render('hello', True, "BLUE")
-            self.window.blit(img, (500, 500))
 
             self.window.blit(self.borad, (0, 0))
             pg.draw.circle(self.window, self.cur_chess_color,
